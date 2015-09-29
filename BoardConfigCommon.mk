@@ -160,8 +160,8 @@ BOARD_SEPOLICY_UNION += \
 
 # Hardware
 BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw \
-    $(LOCAL_PATH)/cmhw
+    hardware/mokee/mkhw \
+    $(LOCAL_PATH)/mkhw
 
 # Inherit from the proprietary version
 -include vendor/htc/msm8974-common/BoardConfigVendor.mk
