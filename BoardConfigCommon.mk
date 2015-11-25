@@ -159,6 +159,3 @@ BOARD_SEPOLICY_UNION += \
 BOARD_HARDWARE_CLASS := \
     hardware/mokee/mkhw \
     $(LOCAL_PATH)/mkhw
-
-# Inherit from the proprietary version
--include vendor/htc/msm8974-common/BoardConfigVendor.mk
