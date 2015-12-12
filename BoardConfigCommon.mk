@@ -128,6 +128,6 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # Hardware
 BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw \
-    $(LOCAL_PATH)/cmhw
+    hardware/mokee/mkhw \
+    $(LOCAL_PATH)/mkhw
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/htc_sensorhub/sensor_hub/tap2wake"
