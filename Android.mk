@@ -18,7 +18,7 @@ LOCAL_PATH := $(call my-dir)
 
 ifeq ($(BOARD_VENDOR),htc)
 ifeq ($(TARGET_BOARD_PLATFORM),msm8974)
-ifeq ($(filter mectl mecspr mecdwg mecdug,$(TARGET_DEVICE)),)
+ifneq ($(TARGET_DEVICE),mecdug)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)
