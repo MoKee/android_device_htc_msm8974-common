@@ -17,16 +17,14 @@
 
 package org.mokee.hardware;
 
-import java.io.File;
-import org.mokee.hardware.util.FileUtils;
+import org.mokee.internal.util.FileUtils;
 
 public class VibratorHW {
 
     private static String LEVEL_PATH = "/sys/devices/virtual/timed_output/vibrator/voltage_level";
 
     public static boolean isSupported() {
-        File f = new File(LEVEL_PATH);
-        return f.exists();
+        return FileUtils.isFileWritable(LEVEL_PATH);
     }
 
     public static int getMaxIntensity()  {
