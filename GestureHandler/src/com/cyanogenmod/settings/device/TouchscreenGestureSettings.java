@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
-import org.cyanogenmod.internal.util.ScreenType;
+import org.mokee.internal.util.ScreenType;
 
 public class TouchscreenGestureSettings extends PreferenceActivity {
 
