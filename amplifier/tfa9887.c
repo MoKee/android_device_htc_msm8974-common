@@ -167,14 +167,18 @@ void * write_dummy_data(void *param)
         goto err_close_pcm;
     }
 
+    bool signaled = false;
     do {
         if (pcm_write(pcm, buffer, size)) {
             ALOGE("%s: pcm_write failed", __func__);
         }
-        pthread_mutex_lock(&amp->mutex);
-        amp->writing = true;
-        pthread_cond_signal(&amp->cond);
-        pthread_mutex_unlock(&amp->mutex);
+        if (!signaled) {
+            pthread_mutex_lock(&amp->mutex);
+            amp->writing = true;
+            pthread_cond_signal(&amp->cond);
+            pthread_mutex_unlock(&amp->mutex);
+            signaled = true;
+        }
     } while (amp->initializing);
 
 err_free:
@@ -457,6 +461,7 @@ static int tfa9887_load_patch(struct tfa9887_amp_t *amp, const char *file_name)
     uint8_t buffer[MAX_I2C_LENGTH];
     uint32_t value = 0;
     uint16_t status;
+    uint16_t status_ok = TFA9887_STATUS_VDDS | TFA9887_STATUS_PLLS | TFA9887_STATUS_CLKS;
 
     if (!amp) {
         return -ENODEV;
@@ -470,7 +475,7 @@ static int tfa9887_load_patch(struct tfa9887_amp_t *amp, const char *file_name)
 
     error = tfa9887_read_reg(amp, TFA9887_STATUS, &status);
     if (error != 0) {
-        if ((status & 0x0043) != 0x0043) {
+        if ((status & status_ok) != status_ok) {
             /* one of Vddd, PLL and clocks not ok */
             error = -1;
         }
