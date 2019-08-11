@@ -19,7 +19,7 @@
  *
  */
 
-package org.lineageos.settings.device;
+package org.mokee.settings.device;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
